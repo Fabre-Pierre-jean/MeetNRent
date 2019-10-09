@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ad.title }}{% endblock %}
+
+{% block body %}
+
+<div class="ad mt-3" style="background-image: url({{ ad.coverImage }})">
+    <div class="container ">
+        <h1>{{ ad.title }}</h1>
+        <p>{{ ad.introduction }}</p>
+        <p class="h2">
+            <strong>{{ ad.rooms }} chambres</strong> pour <strong>{{ ad.price }}&euro;</strong> par nuit
+        </p>
+        <a href="#" class="btn btn-primary">Réserver</a>
+    </div>
+</div>
+    <hr>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mb-3" style="background-color: lightgrey">
+
+            <div class="mt-3">{{ ad.contents | raw }}</div>
+            <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for image in ad.images %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" class="{% if loop.first %}active{% endif %}"></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+                    {% for image in ad.images %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <img class="d-block w-100" src="{{ image.url }}" alt="First slide">
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+
+{#    <div class="col ml-4">#}
+{#        <div class="row">#}
+{#            <div class="col-4">#}
+{#                <img src="http://placehold.it/64x64" alt="AVAtAR">#}
+{#            </div>#}
+{#            <div class="col">#}
+{#                <h3>FABRE PJ</h3>#}
+{#                <span class="badge badge-primary">3 Annonces</span>#}
+{#            </div>#}
+{#            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid eligendi ex facilis maxime numquam#}
+{#                obcaecati quasi tenetur totam veritatis voluptatem.</p>#}
+{#            <p>At ducimus ex expedita, fugiat hic laboriosam, minima modi nemo nisi, officia quasi qui similique#}
+{#                suscipit tempora veniam veritatis vero?</p>#}
+{#            <p>Accusantium alias aperiam asperiores culpa exercitationem ipsum laborum nihil officiis possimus vero.#}
+{#                Ab dolor excepturi hic numquam, quod repellendus sapiente?</p>#}
+{#        </div>#}
+{#    </div>#}
+
+    <div class="col">
+        <div class="row" >
+            <div class="col">
+                <div class="card bg-light mb-3 ">
+                    <div class="card-header">
+                        <div class="row">
+                            <img src="http://placehold.it/64x64" alt="Avatar">
+                            <div class="col"><h3>Fabre PJ</h3>
+                                <span class="badge badge-primary">3 annonces</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
+
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            {{ ad.title }}
+                        </h4>
+                        <p class="card-text">
+                            {{ ad.introduction }}
+                        </p>
+                        <a href="{{ path('ads_show', {'slug' : ad.slug}) }}" class="btn btn-secondary">En savoir plus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

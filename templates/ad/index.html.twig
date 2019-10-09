@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos magnifiques annonces !{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for ad in ads %} {#  we make a foreach for the array $ads who come from my AdController  #}
+                {% set url =  path('ads_show', {'slug' : ad.slug})  %} {# we can make a variable because if we want to change it we have to change it just one time and a good code is the shortest code#}
+                <div class="col-md-4">
+                <div class="card bg-light mb-3">
+                    <div class="card-header text-center">
+                        {{ ad.rooms }} chambres <strong>{{ ad.price }} € / nuit</strong><br>
+                        <small>Pas encore noté</small>
+                    </div>
+                    <a href="{{ url }}">
+                        <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
+                    </a>
+
+                    <div class="card-body">
+                        <a href="{{ url }}" style="text-decoration: none; color: inherit;">
+                            <h4 class="card-title">
+                                {{ ad.title }}
+                            </h4>
+                        </a>
+                        <p class="card-text">
+                            {{ ad.introduction }}
+                        </p>
+
+                        <a href="{{ url }}" class="btn btn-secondary">En savoir plus</a>
+                    </div>
+                </div>
+        </div>
+            {% endfor %}
+    </div>
+{% endblock %}

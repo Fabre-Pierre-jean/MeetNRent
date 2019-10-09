@@ -1,0 +1,34 @@
+body {
+    font-family: 'Cormorant', Serif;
+    font-size: 18px;
+    line-height: 1.43;
+    color: rgba(20, 47, 134, 0.74);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+nav{
+    font-size: 30px;
+}
+
+div.container{
+    margin-top: 20px;
+}
+
+body.a{
+    text-decoration: none;
+    color: inherit;
+}
+
+div.ad{
+    padding: 2em;
+    background-size: cover;
+    background-position: center center;
+}
+
+div.ad h1, div.ad p{
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0,0,0, 0.5);
+}
+
