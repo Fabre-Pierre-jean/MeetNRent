@@ -15,6 +15,8 @@ class AdController extends AbstractController
 {
     /**
      * @Route("/ads", name="ads_index")
+     * @param AdRepository $em
+     * @return Response
      */
     public function index(AdRepository $em)
     {
@@ -28,6 +30,8 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/new", name="ads_new")
+     * @param Request $request
+     * @param ObjectManager $manager
      * @return Response
      */
     public function create(Request  $request, ObjectManager $manager)
@@ -59,6 +63,7 @@ class AdController extends AbstractController
     /**
      * @Route("/ads/{slug}", name="ads_show")
      *
+     * @param Ad $ad
      * @return Response
      */
     public function show(Ad $ad){
@@ -67,4 +72,35 @@ class AdController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/ads/{slug}/edit", name="ads_edit")
+     *
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     * @param Request $request
+     * @return Response
+     */
+    public function edit(Ad $ad, ObjectManager $manager, Request $request){
+        $form = $this->createForm(AdType::class, $ad);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()&& $form->isValid() ) {
+//            $manager = $this->getDoctrine()->getManager(); No more necessarly
+            $manager->persist($ad);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                "L'annonce {$ad->getTitle()} a bien été crée !"
+            );
+
+            return $this->redirectToRoute('ads_show', [
+                'slug' => $ad->getSlug()
+            ]);
+        }
+
+        return $this->render('ad/create.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
 }

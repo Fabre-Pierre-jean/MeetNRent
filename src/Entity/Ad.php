@@ -6,10 +6,17 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *     fields={"title"},
+ *     message= "Ce titre est déjà utilisé... Veuillez modifier votre titre!"
+ * )
  */
 class Ad
 {
@@ -21,6 +28,14 @@ class Ad
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 100,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
@@ -31,31 +46,55 @@ class Ad
     private $slug;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="float")
      * @ORM\Column(type="float")
      */
     private $price;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 200,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
+     * @Assert\Type(type="string")
      * @ORM\Column(type="text")
      */
     private $introduction;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 2000,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="text")
      */
     private $contents;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Url(
+     *      message = "Ceci n'est pas une url valide"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $coverImage;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="integer")
      * @ORM\Column(type="integer")
      */
     private $rooms;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="ad", orphanRemoval=true)
      */
     private $images;
@@ -71,10 +110,8 @@ class Ad
      * @ORM\PreUpdate()
      */
     public function initializeSlug(){
-        if(empty($this->slug)){
             $slugify = new Slugify();
             $this->slug = $slugify->slugify($this->title);
-        }
     }
 
 

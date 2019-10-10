@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ad;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -34,42 +35,66 @@ class AdType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title',
+            ->add(
+                'title',
                 TextType::class,
                  $this->getOption(
                      "Titre de l'annonce",
-                     "Titre de l'annonce"))
+                     "Titre de l'annonce"
+                 )
+            )
 
-            ->add('price',
+            ->add(
+                'price',
                 MoneyType::class,
                 $this->getOption(
                     "Prix par nuit",
-                    "Prix par nuit"))
+                    "Prix par nuit"
+                )
+            )
 
-            ->add('introduction',
+            ->add(
+                'introduction',
                 TextType::class,
                 $this->getOption(
                     "Décrivez votre annonce en une phrase",
-                    "Introduction" ))
+                    "Introduction"
+                )
+            )
 
-            ->add('coverImage',
+            ->add(
+                'coverImage',
                 TextType::class,
                 $this->getOption(
                     "Entrez l'URL de votre image principale",
-                    "Image principale de l'annonce"))
+                    "Image principale de l'annonce"
+                )
+            )
 
-            ->add('rooms',
+            ->add(
+                'rooms',
                 NumberType::class,[
                     'html5'       => true,
                     'attr'          => ['placeholder' => "Nombre(s) de chambre(s)"],
-                    'label'         => 'Nombre(s) de chambre(s) disponible' ])
+                    'label'         => 'Nombre(s) de chambre(s) disponible'
+                ]
+            )
 
-            ->add('contents',
+            ->add(
+                'contents',
                 TextareaType::class, [
                     'attr'          => [
-                                        'rows'        => '15',
-                                        'placeholder' => "Faites une description détaillée de votre annonce"],
-                                        "label"         => "Description" ])
+                                        'rows'        => '5',
+                                        'placeholder' => "Faites une description détaillée de votre annonce" ],
+                                        "label"         => "Description"
+                ]
+            )
+
+//            ->add('images', CollectionType::class,
+//                [
+//                    'entry_type' => ImageType::class
+//                ]
+//                )
         ;
     }
 

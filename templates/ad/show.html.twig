@@ -4,6 +4,16 @@
 
 {% block body %}
 
+    {% for label,messages in app.flashes  %}
+        <div class="container">
+            <div class="alert alert-{{ label }}">
+                {% for message in messages  %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+
 <div class="ad mt-3" style="background-image: url({{ ad.coverImage }})">
     <div class="container ">
         <h1>{{ ad.title }}</h1>
@@ -18,7 +28,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 mb-3" style="background-color: lightgrey">
-
             <div class="mt-3">{{ ad.contents | raw }}</div>
             <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
                 <ol class="carousel-indicators">
@@ -35,18 +44,8 @@
                             <p>{{ image.caption }}</p>
                         </div>
                     </div>
-
-
                     {% endfor %}
                 </div>
-                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
             </div>
         </div>
 
