@@ -30,7 +30,13 @@
                     {% for image in ad.images %}
                     <div class="carousel-item {% if loop.first %}active{% endif %}">
                         <img class="d-block w-100" src="{{ image.url }}" alt="First slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>{{ ad.title }}</h3>
+                            <p>{{ image.caption }}</p>
+                        </div>
                     </div>
+
+
                     {% endfor %}
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -75,14 +81,17 @@
                         </div>
                     </div>
 
-                    <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
-
                     <div class="card-body">
                         <h4 class="card-title">
-                            {{ ad.title }}
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                         </h4>
                         <p class="card-text">
-                            {{ ad.introduction }}
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolor esse minima ullam velit.
+                            Accusantium aliquid fuga nostrum odit pariatur.</p>
+                        <p>Aliquam aspernatur, corporis doloribus est, eveniet impedit inventore minima minus nam
+                            nostrum placeat tempora ullam, veniam! Eaque magnam minus optio.</p>
+                        <p>Atque consequatur cumque deleniti, dolorem et fugiat, ipsa nesciunt porro quia quo quos rem
+                            reprehenderit sed sint tempore veniam vitae?</p>
                         </p>
                         <a href="{{ path('ads_show', {'slug' : ad.slug}) }}" class="btn btn-secondary">En savoir plus</a>
                     </div>

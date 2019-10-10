@@ -22,7 +22,7 @@ header .overlay{
 }
 
 h1 {
-    font-family: 'Cormorant';
+    font-family: Cormorant,'Open Sans', sans-serif;
     font-size: 80px;
     margin-bottom: 30px;
 }

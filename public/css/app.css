@@ -1,6 +1,6 @@
 body {
-    font-family: 'Cormorant', Serif;
-    font-size: 18px;
+    font-family: Cormorant, Serif;
+    font-size: 22px;
     line-height: 1.43;
     color: rgba(20, 47, 134, 0.74);
     margin: 0;
@@ -9,8 +9,54 @@ body {
 }
 
 nav{
-    font-size: 30px;
+    font-size: 25px;
 }
+
+input::placeholder{
+    font-size: 20px;
+}
+
+input[type="text"]{
+    font-size:22px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
+
+input[type="number"]{
+    font-size:22px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
+
+
+/*input[type="text"]:focus{*/
+/*    font-size:22px;*/
+/*    color:darkblue;*/
+/*    background-color: lightgrey;*/
+/*}*/
+
+textarea::placeholder{
+    font-size: 22px;
+}
+
+.form-control[type="number"]{
+    font-size: 22px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
+
+.form-control{
+    font-size: 30px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
+
+.form-control:focus{
+    font-size: 25px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
+
 
 div.container{
     margin-top: 20px;
@@ -29,6 +75,11 @@ div.ad{
 
 div.ad h1, div.ad p{
     color: white;
-    text-shadow: 3px 3px 3px rgba(0,0,0, 0.5);
+    text-shadow: 3px 3px 3px rgba(20, 47, 134, 0.5);
+}
+
+div.carousel-caption {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(20, 47, 134, 0.5);
 }
 

@@ -37,7 +37,6 @@ class AppFixtures extends Fixture
                         ->setCaption($faker->sentence())
                         ->setAd($ad);
                 $manager->persist($image);
-
             }
 
             $manager->persist($ad);
