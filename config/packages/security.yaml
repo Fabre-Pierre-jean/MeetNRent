@@ -1,7 +1,19 @@
 security:
+    encoders:
+        App\Entity\User:
+            algorithm: bcrypt
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         in_memory: { memory: null }
+        chain_provider:
+            chain:
+                providers: [in_database_email, in_database_pseudo]
+        in_database_email:
+            entity:
+                class: App\Entity\User
+                property: email
+        in_database_pseudo:
+            entity: { class: App\Entity\User, property: pseudo } # autre façon de l'ecrire, là j'autorise la connexion avec le pseudo plutot que l'email
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
@@ -9,6 +21,7 @@ security:
         main:
             anonymous: true
 
+            provider: chain_provider
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 
