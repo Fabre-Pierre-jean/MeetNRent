@@ -1,6 +1,6 @@
 body {
     font-family: Cormorant, Serif;
-    font-size: 22px;
+    font-size: 18px;
     line-height: 1.43;
     color: rgba(20, 47, 134, 0.74);
     margin: 0;
@@ -9,7 +9,11 @@ body {
 }
 
 nav{
-    font-size: 25px;
+    font-size: 22px;
+}
+
+.navbar-brand{
+    font-size: 12px;
 }
 
 input::placeholder{
@@ -44,6 +48,11 @@ textarea::placeholder{
     color:darkblue;
     background-color: #f1f1f1;
 }
+.form-control[type="text"]{
+    font-size: 22px;
+    color:darkblue;
+    background-color: #f1f1f1;
+}
 
 .form-control{
     font-size: 30px;
@@ -64,6 +73,18 @@ textarea::placeholder{
 
 div.container{
     margin-top: 20px;
+}
+
+.alert{
+    font-size: 20px;
+}
+
+.form-error-message{
+    font-size: 20px;
+}
+
+label{
+    font-size: 20px;
 }
 
 body.a{

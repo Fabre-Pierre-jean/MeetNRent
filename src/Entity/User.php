@@ -7,10 +7,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(
+ *      fields={"email"},
+ *     message= "Cet email est déjà utilisé"
+ * )
  */
 class User implements UserInterface
 {
@@ -22,26 +28,59 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 30,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $firstName;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $lastName;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Email(message = "Ceci n'est pas une url valide")
      * @ORM\Column(type="string", length=255)
      */
     private $email;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 5,
+     *      max = 200,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
+     * @Assert\Type(type="string")
      * @ORM\Column(type="string", length=255)
      */
     private $introduction;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 50,
+     *      max = 2000,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="text")
      */
     private $description;
@@ -50,6 +89,11 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $passwordHash;
+
+    /**
+     * @Assert\EqualTo(propertyPath="passwordHash", message="Les mots de passe ne sont pas identiques...")
+     */
+    public $passwordConfirm;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -67,6 +111,14 @@ class User implements UserInterface
     private $ads;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Vous devez écrire un texte d'au moins {{ limit }} caractères",
+     *      maxMessage = "Vous devez écrire un texte de {{ limit }} caractères maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $pseudo;

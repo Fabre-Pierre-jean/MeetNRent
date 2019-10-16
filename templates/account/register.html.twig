@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} S'inscrire ! {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="h1">Bienvenue sur la page d'inscription</h1>
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button type="submit" class="btn btn-success">Confirmer votre inscription</button>
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
+

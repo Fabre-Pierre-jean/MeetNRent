@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Ad;
-use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -12,22 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AdType extends AbstractType
+class AdType extends ApplicationType
 {
-    /**
-     * Permet de ne pas se repeter
-     *
-     * @param $label
-     * @param $placeholder
-     * @return array
-     */
-    private function getOption($label, $placeholder){
-        return [
-            'attr'          => ['placeholder' => "$placeholder"],
-            "label"         => "$label"
-        ];
-    }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options

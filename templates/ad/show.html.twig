@@ -4,16 +4,6 @@
 
 {% block body %}
 
-    {% for label,messages in app.flashes  %}
-        <div class="container">
-            <div class="alert alert-{{ label }}">
-                {% for message in messages  %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </div>
-        </div>
-    {% endfor %}
-
 <div class="ad mt-3" style="background-image: url({{ ad.coverImage }})">
     <div class="container ">
         <h1>{{ ad.title }}</h1>
