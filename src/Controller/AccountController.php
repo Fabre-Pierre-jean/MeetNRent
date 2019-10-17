@@ -8,6 +8,8 @@ use App\Form\AccountType;
 use App\Form\PasswordChangeType;
 use App\Form\RegistrationType;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,6 +42,8 @@ class AccountController extends AbstractController
 
     /**
      * Permet de se déconnecter
+     *
+     * @IsGranted("ROLE_USER")
      *
      * @Route("/logout", name="account_logout")
      *
@@ -88,6 +92,8 @@ class AccountController extends AbstractController
      *
      * @Route("/profile", name="account_profile")
      *
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
+     *
      * @return Response
      */
     public function profile(Request $request, ObjectManager $manager){
@@ -116,6 +122,8 @@ class AccountController extends AbstractController
      * Modification du mot de passe
      *
      * @Route("/password", name="account_password")
+     *
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
      *
      * @return Response
      */

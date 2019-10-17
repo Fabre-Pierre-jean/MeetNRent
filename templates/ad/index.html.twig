@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
             {% for ad in ads %} {#  we make a foreach for the array $ads who come from my AdController  #}
 
                 {{ include('include/_ad.html.twig') }}

@@ -6,6 +6,8 @@ use App\Entity\Ad;
 use App\Form\AdType;
 use App\Repository\AdRepository;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,6 +34,9 @@ class AdController extends AbstractController
      * Création d'une annonce
      *
      * @Route("/ads/new", name="ads_new")
+     *
+     * @IsGranted("ROLE_USER")
+     *
      * @param Request $request
      * @param ObjectManager $manager
      * @return Response
@@ -68,6 +73,8 @@ class AdController extends AbstractController
     /**
      * @Route("/ads/{slug}", name="ads_show")
      *
+     * @IsGranted("ROLE_USER")
+     *
      * @param Ad $ad
      * @return Response
      */
@@ -79,6 +86,8 @@ class AdController extends AbstractController
 
     /**
      * @Route("/ads/{slug}/edit", name="ads_edit")
+     *
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
      *
      * @param Ad $ad
      * @param ObjectManager $manager
@@ -108,4 +117,20 @@ class AdController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * Supprimer une annonce
+     *
+     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
+     *
+     * @Route("/delete/{slug}", name="ad_delete")
+     */
+    public function deleteAction(Ad $ad, ObjectManager $manager)
+    {
+            $manager->remove($ad);
+            $manager->flush();
+        return $this->redirectToRoute('ads_index');
+    }
+
 }
