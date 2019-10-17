@@ -22,7 +22,7 @@ class UserController extends AbstractController
     /**
      * Permet d'afficher le profil de l'user connecté
      *
-     * @Route("/my_profile", name="my_profile")
+     * @Route("/user/my_profile", name="my_profile")
      *
      */
     public function myProfile(){

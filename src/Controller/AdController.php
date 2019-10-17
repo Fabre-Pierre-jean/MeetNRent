@@ -29,6 +29,8 @@ class AdController extends AbstractController
     }
 
     /**
+     * Création d'une annonce
+     *
      * @Route("/ads/new", name="ads_new")
      * @param Request $request
      * @param ObjectManager $manager
@@ -40,10 +42,13 @@ class AdController extends AbstractController
         $form = $this->createForm(AdType::class, $ad);
         $form->handleRequest($request);
 
+        $ad->setAuthor($this->getUser()); //set l'auteur de l'annonce avec l'auteur qui est connecté
+
         if ($form->isSubmitted()&& $form->isValid() ) {
 //            $manager = $this->getDoctrine()->getManager(); No more necessarly
             $manager->persist($ad);
             $manager->flush();
+
 
             $this->addFlash(
                 'success',
