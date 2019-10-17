@@ -71,7 +71,7 @@ class AdController extends AbstractController
      * @param Ad $ad
      * @return Response
      */
-    public function show(Ad $ad){
+    public function show(Ad $ad){ //ici on utilise le @ParamConverter afin de convertir le slug trouver en une annonce, Symfony prend le slug et va chercher l'annonce qui a ce slug
         return $this->render('ad/show.html.twig', [
            'ad' => $ad
         ]);

@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Ad;
 use App\Entity\Image;
+use App\Entity\Role;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -23,8 +24,32 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr-FR'); //use french language, see faker doc on github to see all the awesome fonctionnalities
 
+        //Gestion users que l'on met dans un array pour pouvoir les attribuer a une ad juste apres
         $users = [];
+
+        //array pour choisir apres de façon random qu'un user soit ou male ou female
         $genres = ['male', 'female'];
+
+        //Création d'un role admin
+        $adminRole = new Role();
+        $adminRole->setTitle('ROLE_ADMIN');
+        $manager->persist($adminRole);
+
+        //création d'un admin
+        $adminUser = new User();
+
+        $adminUser
+                    ->setPseudo('PJ')
+                    ->setEmail('pj@symfony.com')
+                    ->setIntroduction($faker->sentence())
+                    ->setDescription('<p>'. join('</p><p>', $faker->paragraphs(3)). '</p>')
+                    ->setIntroduction('Symfony rocks!!')
+                    ->setFirstName('Pierre-Jean')
+                    ->setLastName('Fabre')
+                    ->setPicture('https://avatars3.githubusercontent.com/u/54306081?s=400&u=c5234f443bb0e3786839ef081fbb871376cf1964&v=4')
+                    ->setPasswordHash($this->encoder->encodePassword($adminUser,'password123'))
+                    ->addUserRole($adminRole);
+        $manager->persist($adminUser);
 
 
         // Gestion des users
