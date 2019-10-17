@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    {% set a = ad.author %}
+
 <div class="ad mt-3" style="background-image: url({{ ad.coverImage }})">
     <div class="container ">
         <h1>{{ ad.title }}</h1>
@@ -15,6 +17,7 @@
     </div>
 </div>
     <hr>
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 mb-3" style="background-color: lightgrey">
@@ -39,32 +42,30 @@
             </div>
         </div>
 
+
+{################# Ads' owner #####################}
     <div class="col">
         <div class="row" >
             <div class="col">
                 <div class="card bg-light mb-3 ">
-                    <div class="card-header">
-                        <div class="row">
-                            <img src="http://placehold.it/64x64" alt="Avatar">
-                            <div class="col"><h3>Fabre PJ</h3>
-                                <span class="badge badge-primary">3 annonces</span>
+                    <a href="{{ path('user_profile', {'slug' : a.slug}) }}">
+                        <div class="card-header">
+                            <div class="row">
+                                <img class="avatar-medium" src="{{ a.picture }}" alt="Avatar">
+                                <div class="col"><h3>{{ a.fullName }}</h3>
+                                    <span class="badge badge-primary"> {{  a.ads | length }}{% if a.ads | length >= 2 %}  annonces {% else %} annonce {% endif %}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="card-body">
                         <h4 class="card-title">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            {{ ad.introduction }}
                         </h4>
                         <p class="card-text">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A dolor esse minima ullam velit.
-                            Accusantium aliquid fuga nostrum odit pariatur.</p>
-                        <p>Aliquam aspernatur, corporis doloribus est, eveniet impedit inventore minima minus nam
-                            nostrum placeat tempora ullam, veniam! Eaque magnam minus optio.</p>
-                        <p>Atque consequatur cumque deleniti, dolorem et fugiat, ipsa nesciunt porro quia quo quos rem
-                            reprehenderit sed sint tempore veniam vitae?</p>
-                        </p>
-                        <a href="{{ path('ads_show', {'slug' : ad.slug}) }}" class="btn btn-secondary">En savoir plus</a>
+                        {{ ad.contents | raw }}
+                        <a href="{{ path('user_profile', {'slug' : a.slug}) }}" class="btn btn-secondary">En savoir plus</a>
                     </div>
                 </div>
             </div>

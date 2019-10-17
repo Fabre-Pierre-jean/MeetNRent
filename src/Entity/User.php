@@ -138,6 +138,10 @@ class User implements UserInterface
         $this->slug = $slugify->slugify($this->firstName . " " .$this->lastName);
     }
 
+    public function getFullName(){
+        return $this->getFirstName() . " " . $this->getLastName();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

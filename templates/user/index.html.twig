@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ user.fullName }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row align-items-center text-center mb-5 ">
+                <div class="col-3 ">
+                    <img class="avatar" src="{{ user.picture }}" alt="Avatar de {{ user.fullName }}">
+                    <br>
+                </div>
+                <div class="col-8">
+                    <h1 class="display-2"><strong>{{ user.fullName }}</strong></h1>
+                    <h3>{{ user.introduction }}</h3>
+                    {% if user.ads | length >=1 %}
+                        <span class="badge badge-info mt-3 text-center">{{ user.ads | length }}{% if user.ads | length >= 2 %}  annonces {% else %} annonce {% endif %}</span>
+                    {% endif %}
+                    <br>
+                    {% if user is same as(app.user) %}
+                    <a href="{{ path('account_profile') }}"><span class="btn btn-primary mt-3 mr-3 text-center">Modifier mes informations</span></a>
+                    <a href="{{ path('account_password') }}"><span class="btn btn-primary mt-3 text-center">Modifier mon mot de passe</span></a>
+                    {% endif %}
+                </div>
+            </div>
+           <div class="text-center">
+               {{ user.description | raw }}
+           </div>
+        </div>
+
+        <hr>
+
+        {% if user.ads | length >=1 %}
+            <h1 class="display-4">{% if user.ads | length >= 2 %} <strong>Les annonces</strong> {% else %} <strong>L'annonce</strong> {% endif %} <strong>de {{ user.fullName }}</strong></h1>
+            <div class="row d-flex justify-content-center">
+                {% for ad in user.ads %}
+                    {{ include('include/_ad.html.twig') }}
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="alert alert-warning">
+                <h1>{{ user.fullName }} n'a pas encore d'annonce !</h1>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
