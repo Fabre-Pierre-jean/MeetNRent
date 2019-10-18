@@ -6,6 +6,7 @@
 
     {% set a = ad.author %}
 
+
 <div class="ad mt-3" style="background-image: url({{ ad.coverImage }})">
     <div class="container ">
         <h1>{{ ad.title }}</h1>
@@ -14,6 +15,9 @@
             <strong>{{ ad.rooms }} chambres</strong> pour <strong>{{ ad.price }}&euro;</strong> par nuit
         </p>
         <a href="#" class="btn btn-primary">Réserver</a>
+        {% if user is same as(app.user) %}
+            <span class="badge badge-danger"><a href="" class="link-badge">Supprimer cette annonce</a></span>
+        {% endif %}
     </div>
 </div>
     <hr>

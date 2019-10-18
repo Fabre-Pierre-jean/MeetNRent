@@ -92,7 +92,7 @@ class AccountController extends AbstractController
      *
      * @Route("/profile", name="account_profile")
      *
-     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return Response
      */
@@ -121,9 +121,9 @@ class AccountController extends AbstractController
     /**
      * Modification du mot de passe
      *
-     * @Route("/password", name="account_password")
+     * @Route("/user/my_profile/password", name="account_password")
      *
-     * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @return Response
      */

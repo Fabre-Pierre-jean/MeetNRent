@@ -111,18 +111,25 @@ div.carousel-caption {
     text-shadow: 3px 3px 3px rgba(20, 47, 134, 0.5);
 }
 
-.avatar-medium{
-    border-radius: 100px;
-    width: 64px;
-    height: 64px;
-}
 
 .avatar{
-    border-radius: 200px;
-width: 250px;
-height: 250px;
+    border-radius: 50%;
+    max-width: 250px;
+    max-height: 250px;
 }
 
+.avatar-medium{
+    border-radius: 50%;
+    max-width: 64px;
+    max-height: 64px;
+}
+
+.avatar-mini{
+    border-radius:50%;
+    max-width: 24px;
+    max-height: 24px;
+
+}
 
 .btn{
     font-size: 19px;

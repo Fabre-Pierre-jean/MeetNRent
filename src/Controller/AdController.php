@@ -24,9 +24,11 @@ class AdController extends AbstractController
     {
         $ads = $em->findAll(); // This method is possible because you inject the dependency in parameter to the index function, the dependency is AdRepository
 
+
+
         return $this->render('ad/index.html.twig', [
             'ads' => $ads,
-            'property' => "active_ad"
+            'property' => "active_ad",
         ]);
     }
 
@@ -71,6 +73,8 @@ class AdController extends AbstractController
     }
 
     /**
+     * Voir une annonce
+     *
      * @Route("/ads/{slug}", name="ads_show")
      *
      * @IsGranted("ROLE_USER")
@@ -80,7 +84,8 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad){ //ici on utilise le @ParamConverter afin de convertir le slug trouver en une annonce, Symfony prend le slug et va chercher l'annonce qui a ce slug
         return $this->render('ad/show.html.twig', [
-           'ad' => $ad
+            'ad'     => $ad,
+            'user'  => $this->getUser()
         ]);
     }
 
@@ -99,7 +104,7 @@ class AdController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted()&& $form->isValid() ) {
-//            $manager = $this->getDoctrine()->getManager(); No more necessarly
+//            $manager = $this->getDoctrine()->getManager(); No more necessarly grace à l'injection de dependance
             $manager->persist($ad);
             $manager->flush();
 
@@ -114,7 +119,8 @@ class AdController extends AbstractController
         }
 
         return $this->render('ad/create.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'user' => $this->getUser()
         ]);
     }
 
@@ -126,7 +132,7 @@ class AdController extends AbstractController
      *
      * @Route("/delete/{slug}", name="ad_delete")
      */
-    public function deleteAction(Ad $ad, ObjectManager $manager)
+    public function deleteAction(Ad $ad, ObjectManager $manager) //La route sera donc {{ path('ad_delete', {'slug' : ad.slug}) }}
     {
             $manager->remove($ad);
             $manager->flush();
