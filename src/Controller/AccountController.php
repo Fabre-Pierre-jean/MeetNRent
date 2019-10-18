@@ -90,7 +90,7 @@ class AccountController extends AbstractController
     /**
      * Modification du profil
      *
-     * @Route("/profile", name="account_profile")
+         * @Route("/profile", name="account_profile")
      *
      * @Security("is_granted('ROLE_USER')")
      *

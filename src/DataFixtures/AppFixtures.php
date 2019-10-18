@@ -53,14 +53,14 @@ class AppFixtures extends Fixture
 
 
         // Gestion des users
-        for( $i=1; $i<=10; $i++ ){
+        for( $i=1; $i<=20; $i++ ){
             $user = new User();
 
            $genre = $faker->randomElement($genres);
 
            $urlBase = 'https://randomuser.me/api/portraits/';
            $pictureId = $faker->numberBetween(1,99) . '.jpg';
-           $picture = $urlBase . ($genre == 'male' ? 'men/' :' women/' ) . $pictureId;
+           $picture = $urlBase . ($genre == 'male' ? 'men/' :'women/' ) . $pictureId;
 
            $passwordHashed = $this->encoder->encodePassword($user, 'password');
 
@@ -79,7 +79,7 @@ class AppFixtures extends Fixture
         }
 
         // Gestion des annonces
-        for( $i=1; $i<=30 ; $i++){ //we want 30 ads
+        for( $i=1; $i<=100 ; $i++){ //we want 30 ads
 
             $title = $faker->sentence(); //random words between 1 and 6 - default option is 6
             $coverImage = $faker->imageUrl(1000,350); // random image from website lorempixel
@@ -112,31 +112,5 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
-
-        //test mail
-//        $transport = (new \Swift_SmtpTransport('smtp.gmail.com', 465))
-//            ->setUsername('adrarformationtamagotweet@gmail.com')
-//            ->setPassword('ADRAR1112')
-//        ;
-//
-//        /*
-//        You could alternatively use a different transport such as Sendmail:
-//
-//        // Sendmail*/
-////        $transport = new \Swift_SendmailTransport('/usr/sbin/sendmail -bs');
-//
-//
-//// Create the Mailer using your created Transport
-//        $mailer = new \Swift_Mailer($transport);
-//
-//// Create a message
-//        $message = (new \Swift_Message('Wonderful Subject'))
-//            ->setFrom(['john@doe.com' => 'John Doe'])
-//            ->setTo(['isecsploit@gmail.com' => 'A name'])
-//            ->setBody('Here is the message itself')
-//        ;
-//
-//// Send the message
-//        $result = $mailer->send($message);
     }
 }

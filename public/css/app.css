@@ -142,3 +142,7 @@ div.carousel-caption {
     padding: 10px;
     font-size: 16px;
 }
+
+.link-badge{
+    text-decoration: none;
+}

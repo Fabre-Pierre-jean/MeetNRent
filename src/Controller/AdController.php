@@ -24,11 +24,10 @@ class AdController extends AbstractController
     {
         $ads = $em->findAll(); // This method is possible because you inject the dependency in parameter to the index function, the dependency is AdRepository
 
-
-
         return $this->render('ad/index.html.twig', [
             'ads' => $ads,
             'property' => "active_ad",
+            'user'  => $this->getUser()
         ]);
     }
 
@@ -136,7 +135,8 @@ class AdController extends AbstractController
     {
             $manager->remove($ad);
             $manager->flush();
-        return $this->redirectToRoute('ads_index');
+        $router = $this->generateUrl('my_profile').'#my_ads';
+        return $this->redirect($router);
     }
 
 }
