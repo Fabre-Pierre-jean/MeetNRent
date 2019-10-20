@@ -17,7 +17,9 @@ class AdController extends AbstractController
 {
     /**
      * @Route("/ads", name="ads_index")
+     *
      * @param AdRepository $em
+     *
      * @return Response
      */
     public function index(AdRepository $em)
@@ -40,6 +42,7 @@ class AdController extends AbstractController
      *
      * @param Request $request
      * @param ObjectManager $manager
+     *
      * @return Response
      */
     public function create(Request  $request, ObjectManager $manager)
@@ -79,6 +82,7 @@ class AdController extends AbstractController
      * @IsGranted("ROLE_USER")
      *
      * @param Ad $ad
+     *
      * @return Response
      */
     public function show(Ad $ad){ //ici on utilise le @ParamConverter afin de convertir le slug trouver en une annonce, Symfony prend le slug et va chercher l'annonce qui a ce slug
@@ -96,6 +100,7 @@ class AdController extends AbstractController
      * @param Ad $ad
      * @param ObjectManager $manager
      * @param Request $request
+     *
      * @return Response
      */
     public function edit(Ad $ad, ObjectManager $manager, Request $request){
@@ -130,6 +135,10 @@ class AdController extends AbstractController
      * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
      *
      * @Route("/ads/{slug}/delete", name="ad_delete")
+     * @param Ad $ad
+     * @param ObjectManager $manager
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public function deleteAction(Ad $ad, ObjectManager $manager) //La route sera donc {{ path('ad_delete', {'slug' : ad.slug}) }}
     {
