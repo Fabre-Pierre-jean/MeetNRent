@@ -6,7 +6,7 @@
     <div class="container">
         <div class="jumbotron">
             <div class="row align-items-center text-center mb-5 ">
-                <div class="col-3 ">
+                <div class="col-3 ml-5 ">
                     <img class="avatar" src="{{ user.picture }}" alt="Avatar de {{ user.fullName }}">
                     <br>
                 </div>
@@ -36,60 +36,7 @@
 
             <div class="row d-flex justify-content-center mt-3">
                 {% for ad in user.ads %}
-                    {% set url =  path('ads_show', {'slug' : ad.slug})  %} {# we can make a variable because if we want to change it we have to change it just one time and a good code is the shortest code#}
-
-                    <div class="col-md-4">
-                        <div class="card bg-light mb-3">
-                            <div class="card-header text-center">
-                                {{ ad.rooms }} chambres <strong>{{ ad.price }} € / nuit</strong><br>
-                                <small>Pas encore noté</small>
-                            </div>
-                            <a href="{{ url }}">
-                                <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
-                            </a>
-
-                            <div class="card-body">
-                                <a href="{{ url }}" style="text-decoration: none; color: inherit;">
-                                    <h4 class="card-title">
-                                        {{ ad.title }}
-                                    </h4>
-                                </a>
-                                <p class="card-text">
-                                    {{ ad.introduction }}
-                                </p>
-
-                                {% if user_connected is defined %}
-                                    <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
-                                {% endif %}
-
-                                {% if user_connected is not defined %}
-                                    {% if user is same as(ad.author) %}
-<!-------------------------------------------------- Button trigger modal --------------------------------------------------------------------------->
-                                        <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning mb-2">Modifier cette annonce</a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                                            Supprimer cette annonce
-                                        </button>
-
-                                        <!-------------------------------------------------- Modal --------------------------------------------------------------------------->
-                                        <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content bg-bark">
-                                                    <div class="modal-body">
-                                                        Etes vous sûr de vouloir supprimer cette annonce ?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                                                        <a href="{{ path('ad_delete', {'slug' : ad.slug}) }}" class="btn btn-danger">Oui je suis sûr !</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-<!-------------------------------------------------- Modal --------------------------------------------------------------------------->
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
+                    {{ include('include/_ad.html.twig') }}
                 {% endfor %}
             </div>
         {% else %}

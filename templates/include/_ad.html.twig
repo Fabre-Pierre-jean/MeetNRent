@@ -1,5 +1,5 @@
 {% set url =  path('ads_show', {'slug' : ad.slug})  %} {# we can make a variable because if we want to change it we have to change it just one time and a good code is the shortest code#}
-
+{% set route_name = app.request.attributes.get('_route') %}
 
 
 <div class="col-md-4">
@@ -21,14 +21,35 @@
             <p class="card-text">
                 {{ ad.introduction }}
             </p>
+{% if id is defined %}
+    {% if user.id is not same as(ad.author.id) %}
+        <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
+    {% endif %}
 
-            {% if user.id is not same as(ad.author.id) %}
-                <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
-            {% endif %}
-            {% if user.id is same as(ad.author.id) %}
-                <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning mb-2">Modifier cette annonce</a>
-                <a href="{{ path('ad_delete', {'slug' : ad.slug}) }}" class="btn btn-danger">Supprimer cette annonce</a>
-            {% endif %}
+    {% if user_connected is not defined and user.id is same as(ad.author.id) and route_name != "ads_index" and user is same as(ad.author) %}
+                    <!-------------------------------------------------- Button trigger modal --------------------------------------------------------------------------->
+                    <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning mb-2">Modifier cette annonce</a>
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                        Supprimer cette annonce
+                    </button>
+
+<!-------------------------------------------------- Modal --------------------------------------------------------------------------->
+                    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content bg-bark">
+                                <div class="modal-body">
+                                    Etes vous sûr de vouloir supprimer cette annonce ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                                    <a href="{{ path('ad_delete', {'slug' : ad.slug}) }}" class="btn btn-danger">Oui je suis sûr !</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!-------------------------------------------------- End Modal --------------------------------------------------------------------------->
+    {% endif %}
+{% endif %}
         </div>
     </div>
 

@@ -17,6 +17,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      fields={"email"},
  *     message= "Cet email est déjà utilisé"
  * )
+ *
+ * @UniqueEntity(
+ *     fields={"pseudo"},
+ *     message= "Ce pseudo est déjà utilisé"
+ * )
+ *
  */
 class User implements UserInterface
 {
@@ -295,7 +301,7 @@ class User implements UserInterface
         $roles = $this->userRoles->map(function($role){
             return $role->getTitle();})->toArray();
 
-        $roles[] = 'ROLE_USER';
+            $roles[] = 'ROLE_USER';
 
        return $roles;
     }
