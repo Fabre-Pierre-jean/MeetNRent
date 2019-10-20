@@ -87,6 +87,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\Length(min=8, minMessage="Votre mot de passe doit faire {{ limit }} caractères minimum")
      */
     private $passwordHash;
 

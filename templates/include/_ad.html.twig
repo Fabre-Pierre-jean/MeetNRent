@@ -22,7 +22,13 @@
                 {{ ad.introduction }}
             </p>
 
-            <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
+            {% if user.id is not same as(ad.author.id) %}
+                <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
+            {% endif %}
+            {% if user.id is same as(ad.author.id) %}
+                <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning mb-2">Modifier cette annonce</a>
+                <a href="{{ path('ad_delete', {'slug' : ad.slug}) }}" class="btn btn-danger">Supprimer cette annonce</a>
+            {% endif %}
         </div>
     </div>
 

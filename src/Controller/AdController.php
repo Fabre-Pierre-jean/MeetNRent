@@ -129,12 +129,19 @@ class AdController extends AbstractController
      *
      * @Security("is_granted('ROLE_USER') and user === ad.getAuthor()")
      *
-     * @Route("/delete/{slug}", name="ad_delete")
+     * @Route("/ads/{slug}/delete", name="ad_delete")
      */
     public function deleteAction(Ad $ad, ObjectManager $manager) //La route sera donc {{ path('ad_delete', {'slug' : ad.slug}) }}
     {
             $manager->remove($ad);
             $manager->flush();
+
+
+        $this->addFlash(
+            'success',
+            "L'annonce {$ad->getTitle()} a bien été supprimée !"
+        );
+
         $router = $this->generateUrl('my_profile').'#my_ads';
         return $this->redirect($router);
     }
