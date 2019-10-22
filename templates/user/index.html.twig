@@ -31,6 +31,7 @@
         <hr>
         {% if user.ads | length >=1 %}
             <div class="text-center">
+{# Voir à rajouter une regex qui permet de voir si le nom commence par une voyelle alors afficher un d' plutot que de #}
                 <h1  id="my_ads" class="display-4 " style="text-decoration: none;color: inherit;">{% if user.ads | length >= 2 %} <strong>Les annonces</strong> {% else %} <strong>L'annonce</strong> {% endif %} <strong>de {{ user.fullName }}</strong></h1>
             </div>
 

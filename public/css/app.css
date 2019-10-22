@@ -82,6 +82,16 @@ div.container{
     font-size: 20px;
 }
 
+.alert-info{
+    font-size: 25px;
+}
+
+.alert-warning{
+    padding-top: 30px;
+    font-size: 40px;
+    text-align: center;
+}
+
 .form-error-message{
     font-size: 20px;
 }
@@ -118,6 +128,12 @@ div.carousel-caption {
     height: 250px;
 }
 
+.avatar-resa{
+    border-radius: 45%;
+    width: 128px;
+    height: 128px;
+}
+
 .avatar-medium{
     border-radius: 50%;
     width: 64px;
@@ -145,4 +161,8 @@ div.carousel-caption {
 
 .link-badge{
     text-decoration: none;
+}
+
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover{
+    color: red !important;
 }

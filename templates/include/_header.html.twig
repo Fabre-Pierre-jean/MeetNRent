@@ -4,7 +4,6 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
-{#    <div class="collapse navbar-collapse" id="navbarColor03">#}
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link {% if  property is defined and property=="active_home" %}active{% endif %}" href="{{ path('homepage') }}" >Accueil</a>
@@ -13,8 +12,7 @@
                 <a class="nav-link {% if property is defined and property=="active_ad" %}active{% endif %}" href="{{ path('ads_index') }}">Nos Annonces</a>
             </li>
         </ul>
-{#    </div>#}
-{#    <div class="collapse navbar-collapse" id="navbarColor03">#}
+
         <ul class="navbar-nav ml-auto">
             {% if app.user %}
                 <li class="nav-item dropdown">
@@ -48,7 +46,7 @@
                     Connexion
                 </a>
 
-                <!-- Modal -->
+<!------------------------------------------------------------ Modal ---------------------------------------------------->
                 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content bg-bark">
@@ -58,11 +56,10 @@
                         </div>
                     </div>
                 </div>
-{#                <a href="{{ path('account_login') }}" class="nav-link">Connexion</a>#}
+<!------------------------------------------------------------ Modal ---------------------------------------------------->
             </li>
             {% endif %}
         </ul>
-{#    </div>#}
 </nav>
 
 {% for label,messages in app.flashes  %}

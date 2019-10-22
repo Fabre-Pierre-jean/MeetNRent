@@ -15,7 +15,7 @@
             <strong>{{ ad.rooms }} chambres</strong> pour <strong>{{ ad.price }}&euro;</strong> par nuit
         </p>
         {% if user.id is not same as(ad.author.id) %}
-        <a href="#" class="btn btn-primary">Réserver</a>
+        <a href="{{ path('booking_new', {'slug' : ad.slug}) }}" class="btn btn-primary">Réserver</a>
         {% endif %}
         {% if user.id is same as(ad.author.id) %}
             <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning">Modifier cette annonce</a>

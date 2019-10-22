@@ -9,6 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -27,9 +28,9 @@ class AdController extends AbstractController
         $ads = $em->findAll(); // This method is possible because you inject the dependency in parameter to the index function, the dependency is AdRepository
 
         return $this->render('ad/index.html.twig', [
-            'ads' => $ads,
-            'property' => "active_ad",
-            'user'  => $this->getUser()
+            'ads'       => $ads,
+            'property'  => "active_ad",
+            'user'      => $this->getUser(),
         ]);
     }
 
@@ -87,8 +88,8 @@ class AdController extends AbstractController
      */
     public function show(Ad $ad){ //ici on utilise le @ParamConverter afin de convertir le slug trouver en une annonce, Symfony prend le slug et va chercher l'annonce qui a ce slug
         return $this->render('ad/show.html.twig', [
-            'ad'     => $ad,
-            'user'  => $this->getUser()
+            'ad'        => $ad,
+            'user'      => $this->getUser()
         ]);
     }
 
@@ -138,7 +139,7 @@ class AdController extends AbstractController
      * @param Ad $ad
      * @param ObjectManager $manager
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function deleteAction(Ad $ad, ObjectManager $manager) //La route sera donc {{ path('ad_delete', {'slug' : ad.slug}) }}
     {

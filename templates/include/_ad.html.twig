@@ -1,56 +1,26 @@
 {% set url =  path('ads_show', {'slug' : ad.slug})  %} {# we can make a variable because if we want to change it we have to change it just one time and a good code is the shortest code#}
-{% set route_name = app.request.attributes.get('_route') %}
 
 
-<div class="col-md-4">
-    <div class="card bg-light mb-3">
-        <div class="card-header text-center">
-            {{ ad.rooms }} chambres <strong>{{ ad.price }} € / nuit</strong><br>
-            <small>Pas encore noté</small>
-        </div>
-        <a href="{{ url }}">
-            <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
-        </a>
+<a href="{{ url }}" style="color: inherit; text-decoration: none">
+    <div class="col-md-4">
+        <div class="card bg-light mb-3">
+            <div class="card-header text-center">
+                {{ ad.rooms }} chambres <strong>{{ ad.price }} € / nuit</strong><br>
+                <small>Pas encore noté</small>
+            </div>
 
-        <div class="card-body">
-            <a href="{{ url }}" style="text-decoration: none; color: inherit;">
-                <h4 class="card-title">
-                    {{ ad.title }}
-                </h4>
-            </a>
-            <p class="card-text">
-                {{ ad.introduction }}
-            </p>
-{% if id is defined %}
-    {% if user.id is not same as(ad.author.id) %}
-        <a href="{{ url }}" class="btn btn-info">En savoir plus</a>
-    {% endif %}
-
-    {% if user_connected is not defined and user.id is same as(ad.author.id) and route_name != "ads_index" and user is same as(ad.author) %}
-                    <!-------------------------------------------------- Button trigger modal --------------------------------------------------------------------------->
-                    <a href="{{ path('ads_edit', {'slug' : ad.slug}) }}" class="btn btn-warning mb-2">Modifier cette annonce</a>
-                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
-                        Supprimer cette annonce
-                    </button>
-
-<!-------------------------------------------------- Modal --------------------------------------------------------------------------->
-                    <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content bg-bark">
-                                <div class="modal-body">
-                                    Etes vous sûr de vouloir supprimer cette annonce ?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
-                                    <a href="{{ path('ad_delete', {'slug' : ad.slug}) }}" class="btn btn-danger">Oui je suis sûr !</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-<!-------------------------------------------------- End Modal --------------------------------------------------------------------------->
-    {% endif %}
-{% endif %}
+                <img src="{{ ad.coverImage }}" alt="Image de l'appartement" style="height: 200px; width: 100%; display: block;">
+            <div class="card-body">
+                <a href="{{ url }}" style="text-decoration: none; color: inherit;">
+                    <h4 class="card-title">
+                        {{ ad.title }}
+                    </h4>
+                </a>
+                <p class="card-text">
+                    {{ ad.introduction }}
+                </p>
+                {{ include('include/_button.html.twig') }}
+            </div>
         </div>
     </div>
-
-</div>
+</a>

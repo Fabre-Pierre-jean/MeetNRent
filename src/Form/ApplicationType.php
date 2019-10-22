@@ -13,13 +13,16 @@ class ApplicationType extends AbstractType
      *
      * @param $label
      * @param $placeholder
+     * @param array $options
      * @return array
      */
-    protected function getOption($label, $placeholder){
-        return [
-            'attr'          => ['placeholder' => "$placeholder"],
-            "label"         => "$label"
-        ];
+    protected function getOption($label, $placeholder, $options = []){
+        return array_merge([
+            "label"         => "$label",
+            'attr'          => [
+                'placeholder' => "$placeholder"
+            ]
+        ],$options);
     }
 
 
